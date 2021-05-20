@@ -7,7 +7,7 @@ class TestParser(TestCase):
     def test(self):
         parser = Parser()
 
-        result = parser.parse('''
+        html = '''
         <html>
             <head>
               <title>LAPRASモブプロ</title>
@@ -19,7 +19,8 @@ class TestParser(TestCase):
               <a href="//example.com">LAPRAS</a>
             </body>
         </html>
-        ''')
+        '''
+        result = parser.parse(html, 'https://test.lapras.com')
 
         self.assertEqual(result.title, 'LAPRASモブプロ')
         self.assertEqual(result.description, '生配信スタート')

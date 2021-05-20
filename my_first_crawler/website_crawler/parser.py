@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from typing import List
+from urllib.parse import urljoin
 
 from bs4 import BeautifulSoup
 
@@ -14,11 +15,11 @@ class WebPage:
 
 class Parser:
 
-    def parse(self, html: str) -> WebPage:
+    def parse(self, html: str, base_url: str) -> WebPage:
         soup = BeautifulSoup(html, 'html.parser')
         title = soup.select_one('title').get_text()
         description = soup.select_one('meta[name="description"]')['content']
-        link_list = [a['href'] for a in soup.select('a')]
+        link_list = [urljoin(base_url, a['href']) for a in soup.select('a')]
 
         return WebPage(
             title=title,
