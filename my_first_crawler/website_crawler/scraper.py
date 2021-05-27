@@ -10,5 +10,6 @@ class Scraper:
     parser: Parser
 
     def get_page(self, url: str) -> WebPage:
+        print('get_page: ', url)
         response = requests.get(url)
         return self.parser.parse(response.text, url)
