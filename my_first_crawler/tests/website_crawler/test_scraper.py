@@ -25,12 +25,10 @@ class TestScraper(TestCase):
 
         url = "https://lapras.com"
         responses.add(responses.GET, url,
-                  body=html, status=200)
+                      body=html, status=200)
         mock_parser = mock.Mock(spec=Parser)
 
         scraper = Scraper(parser=mock_parser)
-        print(scraper.get_page(url))
+        scraper.get_page(url)
 
         mock_parser.parse.assert_called_once()
-
-        pass
