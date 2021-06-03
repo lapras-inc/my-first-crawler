@@ -6,6 +6,7 @@ from website_crawler.scraper import Scraper
 
 crawled_url: List[str] = []
 
+
 def crawl(seed_url: str):
     # TODO: seed_url を scrape する
     # TODO: オンメモリで scrape した URL をクロール済みの URL を持っておく
@@ -17,12 +18,13 @@ def crawl(seed_url: str):
     crawled_url.append(seed_url)
     seed_domain = urlparse(seed_url).netloc
 
-    crawl_web_page_links(web_page, seed_domain)
-
 
 def crawl_web_page_links(web_page: WebPage, seed_domain: str) -> List[WebPage]:
     scraper = Scraper(Parser())
     web_page_list = []
+
+    # TODO: 同じドメイン、クロール済みだったらスキップする
+    # クロールずみの WebPage なら link_list を見なくてもいいよね
 
     for link in web_page.link_list:
         link_domain = urlparse(link).netloc
@@ -38,12 +40,6 @@ def crawl_web_page_links(web_page: WebPage, seed_domain: str) -> List[WebPage]:
 
         web_page_list.append(scraper.get_page(link))
         crawled_url.append(link)
+        # TODO: scraper.get_page(link) に対して crawl_web_page_links を呼ぶ
 
     return web_page_list
-
-
-
-
-
-
-
