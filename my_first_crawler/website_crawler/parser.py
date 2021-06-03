@@ -17,12 +17,12 @@ class Parser:
 
     def parse(self, html: str, base_url: str) -> WebPage:
         soup = BeautifulSoup(html, 'html.parser')
-        title = soup.select_one('title').get_text()
+        title_elem = soup.select_one('title')
         description_elem = soup.select_one('meta[name="description"]')
         link_list = [urljoin(base_url, a['href']) for a in soup.select('a')]
 
         return WebPage(
-            title=title,
+            title=title_elem.get_text() if title_elem else None,
             description=description_elem['content'] if description_elem else None,
             link_list=link_list,
         )

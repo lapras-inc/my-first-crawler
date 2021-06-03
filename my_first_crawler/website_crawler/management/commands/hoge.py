@@ -1,5 +1,5 @@
 
-from website_crawler.usecase import crawl
+from website_crawler.usecase import start
 
 from django.core.management.base import BaseCommand, CommandError
 
@@ -12,4 +12,4 @@ class Command(BaseCommand):
 
     def handle(self, seed_url, **options):
         print(seed_url)
-        crawl(seed_url)
+        start(seed_url)

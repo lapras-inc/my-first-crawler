@@ -34,7 +34,6 @@ class TestParser(TestCase):
         html = '''
         <html>
             <head>
-              <title>LAPRASモブプロ</title>
             </head>
             <body>
               <a href="https://lapras.com">LAPRAS</a>
@@ -45,5 +44,6 @@ class TestParser(TestCase):
         '''
         result = parser.parse(html, 'https://test.lapras.com')
 
-        self.assertEqual(result.title, 'LAPRASモブプロ')
+        self.assertIsNone(result.title)
         self.assertIsNone(result.description)
+
